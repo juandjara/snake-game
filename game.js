@@ -97,7 +97,7 @@
     ctx.fillStyle = 'white';
     ctx.fillRect(0,0, COLS*CELL_SIZE, ROWS*CELL_SIZE);
 
-    snake.body.forEach(point => drawCell(point.x, point.y, "green", "darkgreen"));
+    snake.body.forEach(point => drawCell(point.x, point.y, "green", "limegreen"));
     drawCell(food.x, food.y, "red");
   }
 
@@ -112,7 +112,12 @@
   }
 
   function checkSelfCollision() {
-    //TODO
+    var head = snake.body.slice(-1)[0];
+    var body = snake.body.slice(0, -1);
+    var collision = body.filter(point => {
+      return point.x === head.x && point.y === head.y;
+    }).length > 0;
+    return collision;
   }
 
   function gameover() {
@@ -166,15 +171,17 @@
       '68': 'right'  // d
     }
     var newDirection = keyMap[keyCode];
-    moveSnake(newDirection);
+    if(newDirection) {
+      moveSnake(newDirection);
+    }
   }
 
   window.moveSnake = function moveSnake(newDirection) {
     var directionInverseMap = {
-      'left': 'right',
+      'left':  'right',
       'right': 'left',
-      'up': 'down',
-      'down': 'up'
+      'up':    'down',
+      'down':  'up'
     }
     var oppositeDirection = directionInverseMap[newDirection];
 
