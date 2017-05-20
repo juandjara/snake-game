@@ -13,10 +13,11 @@
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/html5bp.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <style>
     body {
       padding: .5rem;
-      max-width: 400px;
+      max-width: 768px;
       margin: 0 auto;
       background: #f0f0f0;
     }
@@ -32,16 +33,25 @@
     .move-button {
       background: white;
       border: 1px solid #ccc;
-      width: 26px;
-      height: 26px;
+      width: 40px;
+      height: 40px;
+      padding-top: .5em;
     }
     .move-button-top {
-      transform: rotate(180deg);
-      margin-left: 30px;
+      margin-left: 44px;
       margin-bottom: 4px;
     }
+    .action-button {
+      margin: 5px 0;
+      padding: 5px .5em;
+      background: white;
+      border: 1px solid #ccc;
+    }
+    .canvas-container {
+      padding-top: 1em;
+    }
     footer {
-      padding: 1rem 0;
+      padding: 1rem .5rem;
       text-align: right;
       font-size: 12px;
     }
@@ -62,11 +72,19 @@
         Tambi&eacute;n puedes usar los botones a la izquierda.
       </p>
     </header>
-    <button onclick="moveSnake('up')" class="move-button move-button-top"> v </button>
+    <button onclick="moveSnake('up')" class="move-button move-button-top">
+      <i class="material-icons">keyboard_arrow_up</i>
+    </button>
     <section>
-       <button onclick="moveSnake('left')" class="move-button"> < </button>
-       <button onclick="moveSnake('down')" class="move-button"> v </button>
-       <button onclick="moveSnake('right')" class="move-button"> > </button>
+       <button onclick="moveSnake('left')" class="move-button">
+         <i class="material-icons">keyboard_arrow_left</i>
+       </button>
+       <button onclick="moveSnake('down')" class="move-button">
+         <i class="material-icons">keyboard_arrow_down</i>
+       </button>
+       <button onclick="moveSnake('right')" class="move-button">
+         <i class="material-icons">keyboard_arrow_right</i>
+       </button>
     </section>
     <section style="display: flex;">
       <p style="flex: 1;">
@@ -75,15 +93,17 @@
         </strong>
       </p>
       <div>
-        <button style="margin: 5px 0;" onclick="start_snake()">Comenzar</button>
-        <button style="margin: 5px 0;" onclick="pause_snake()">Pausa</button>
+        <button class="action-button" onclick="start_snake()">Comenzar</button>
+        <button class="action-button" onclick="pause_snake()">Pausa</button>
       </div>
     </section>
-    <canvas width="400" height="400"
-            style="border: 1px solid #e4e4e4;">
-      If you see this your browser does not support the canvas element. Please stop being a dinosaur.
-    </canvas>
-
+    <div class="canvas-container">
+      <canvas style="border: 1px solid #e4e4e4;">
+        If you see this message
+        your browser does not support the canvas element.
+        Please stop being a dinosaur.
+      </canvas>
+    </div>
     <script src="game.js"></script>
     <footer>
       Otro experimento de <a href="https://fuken.xyz" target="_blank">Juan D. Jara</a>

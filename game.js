@@ -1,8 +1,10 @@
 (function(){
 
-  var CELL_SIZE = 10;
   var ROWS = 40;
   var COLS = 40;
+  var canvasMargin = 18;
+  var canvasWidth = Math.min(500, (window.innerWidth - canvasMargin));
+  var CELL_SIZE = canvasWidth / ROWS;
 
   var canvas = document.querySelector("canvas");
   var score_container = document.querySelector("#snake_score");
@@ -18,17 +20,26 @@
     y: ROWS/2,
   };
   var score = 0;
-  var grid = [[], []];
 
   var fps = 10;
   var frameDuration = 1000 / fps;
 
   var timer = null;
 
+  function setupCanvas() {
+    canvas.width  = canvasWidth;
+    canvas.height = canvasWidth;
+    var container = document.querySelector('.canvas-container');
+    var margin = Math.min(768, (window.innerWidth - canvasMargin));
+    margin -= canvasWidth;
+    if(margin < 0) margin = 0;
+    container.style.margin = "0 "+margin/2+"px";
+  }
+
   function init() {
+    setupCanvas();
     initSnake(snakeInitialLength);
     score_container.innerHTML = getScore();
-    initGrid();
 
     food = createFood();
     update();
@@ -51,11 +62,6 @@
     for(var i = 0; i < initialLength; i++) {
       snake.body.push({ x:i, y:1 })
     }
-  }
-
-  function initGrid() {
-    // fill ROWS x COLS array wih color strings (css or hex)
-    grid = Array(ROWS).fill(Array(COLS).fill("white"));
   }
 
   function randomIntInRange(start, end) {
